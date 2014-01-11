@@ -27,8 +27,6 @@ namespace 字中字
         }
         public void CreateBmp()
         {
-
-            char c = textBox1.Text.ToCharArray()[0];
             Font f = new System.Drawing.Font(comboBox1.SelectedItem.ToString().Trim(), size/2, FontStyle.Regular);
             bmp = new System.Drawing.Bitmap(size * textBox1.Text.Trim().Length, size);
             //Image image = new System.Drawing.Bitmap(32,32);
@@ -74,11 +72,11 @@ namespace 字中字
                 }
                 if (buf[a] == 255)
                 {
-                    sbArray[count].Append(textBox3.Text.ToCharArray().Length > 0 ? textBox3.Text.ToCharArray()[0].ToString() : "x");
+                    sbArray[count].Append(GetSafeString(textBox3.Text.ToCharArray().Length > 0 ? textBox3.Text.ToCharArray()[0].ToString() : "x"));
                 }
                 else
                 {
-                    sbArray[count].Append(textBox4.Text.ToCharArray().Length > 0 ? textBox4.Text.ToCharArray()[0].ToString() : " ");
+                    sbArray[count].Append(GetSafeString(textBox4.Text.ToCharArray().Length > 0 ? textBox4.Text.ToCharArray()[0].ToString() : " "));
                 }
             }
             for (int a = sbArray.Length - 1; a >= 0; a--)
@@ -109,6 +107,16 @@ namespace 字中字
         private void button3_Click(object sender, EventArgs e)
         {
             textBox2.Text = "";
+        }
+        public string GetSafeString(string str)
+        {
+            // 半角转全角：
+            char c = str.ToCharArray()[0];
+            if (c == 32)
+                c = (char)12288;
+            if (c < 127)
+                c = (char)(c + 65248);
+            return c.ToString();
         }
     }
 }
