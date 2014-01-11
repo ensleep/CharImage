@@ -19,28 +19,37 @@ namespace 字中字
         public Form1()
         {
             InitializeComponent();
+            label5.Text = "CopyRight@  张峻崎 2014";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             CreateBmp();
         }
         public void CreateBmp()
         {
-            Font f = new System.Drawing.Font(comboBox1.SelectedItem.ToString().Trim(), size/2, FontStyle.Regular);
-            bmp = new System.Drawing.Bitmap(size * textBox1.Text.Trim().Length, size);
-            //Image image = new System.Drawing.Bitmap(32,32);
-            Graphics gra = Graphics.FromImage(bmp);
-            System.Drawing.Drawing2D.LinearGradientBrush b = new System.Drawing.Drawing2D.LinearGradientBrush(new Rectangle(0, 0, size * textBox1.Text.Trim().Length, size), Color.Black, Color.Black, 0, false);
-            gra.DrawString( textBox1.Text.Trim(), f, b, 0, 0);
-            pictureBox1.Height = size;
-            pictureBox1.Width = size * textBox1.Text.Trim().Length;
-            pictureBox1.Image = bmp;
-            if (File.Exists("tmp.bmp"))
+            if(textBox1.Text.Trim()=="")
             {
-                File.Delete("tmp.bmp");
+                MessageBox.Show("请输入要转换的字符哦~~不然，怎么转换呢?");
             }
-            bmp.Save("tmp.bmp", ImageFormat.Bmp);
+            else
+            {
+                Font f = new System.Drawing.Font(comboBox1.SelectedItem.ToString().Trim(), size / 2, FontStyle.Regular);
+                bmp = new System.Drawing.Bitmap(size * textBox1.Text.Trim().Length, size);
+                //Image image = new System.Drawing.Bitmap(32,32);
+                Graphics gra = Graphics.FromImage(bmp);
+                System.Drawing.Drawing2D.LinearGradientBrush b = new System.Drawing.Drawing2D.LinearGradientBrush(new Rectangle(0, 0, size * textBox1.Text.Trim().Length, size), Color.Black, Color.Black, 0, false);
+                gra.DrawString(textBox1.Text.Trim(), f, b, 0, 0);
+                pictureBox1.Height = size;
+                pictureBox1.Width = size * textBox1.Text.Trim().Length;
+                pictureBox1.Image = bmp;
+                if (File.Exists("tmp.bmp"))
+                {
+                    File.Delete("tmp.bmp");
+                }
+                bmp.Save("tmp.bmp", ImageFormat.Bmp);
+            }
         }
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
