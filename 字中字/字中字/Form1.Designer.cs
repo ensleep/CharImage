@@ -205,7 +205,7 @@
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Location = new System.Drawing.Point(6, 9);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 390);
+            this.panel1.Size = new System.Drawing.Size(230, 480);
             this.panel1.TabIndex = 15;
             // 
             // Form1
